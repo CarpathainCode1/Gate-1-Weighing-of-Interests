@@ -97,7 +97,7 @@ If Gain and Likelihood were both 3 and two societal interests selected → Inter
 
 ## License
 
-© 2025 Your Organisation. MIT License – see [LICENSE](LICENSE) for details.
+© 2025 C. Berce – see [LICENSE](LICENSE) for details.
 
 ---
 

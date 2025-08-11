@@ -1,6 +1,6 @@
-# app.R
 # Gate 1: Weighing-of-Interests — Interactive Shiny App
 # Save this file as app.R and run with: shiny::runApp()
+# --- C. Berce 2025 --------------------------------------------------------
 
 library(shiny)
 library(bslib)
@@ -46,6 +46,7 @@ scale_badge <- function(val) {
                          val))
 }
 
+# READ THIS IF YOU LOOK IN THE SCRIPT:
 # Simple scoring rubric:
 # - Suitability score = mean of construct/internal/external (0-3)
 # - Necessity guardrails: if Replacement available == Yes → auto “Not Justifiable”
@@ -63,20 +64,20 @@ compute_summary <- function(input) {
     as.numeric(input$internal),
     as.numeric(input$external)
   ), na.rm = TRUE)
-  
+
   replacement_available <- as.numeric(input$replacement) == 1
   reduction_ok          <- as.numeric(input$reduction) == 1
   refinement_ok         <- as.numeric(input$refinement) == 1
-  
+
   sev <- as.numeric(input$severity)
   nonpath_n <- length(input$nonpath)
   strain_score <- sev + 0.5 * nonpath_n
-  
+
   gain <- as.numeric(input$gain)
   likelihood <- as.numeric(input$likelihood)
   interest_n <- length(input$interests)
   interest_score <- (gain * likelihood) / 3 + 0.25 * interest_n
-  
+
   # decision
   decision <- if (replacement_available) {
     "NOT JUSTIFIABLE — a fit-for-purpose non-animal alternative was indicated (Replace)."
@@ -87,7 +88,7 @@ compute_summary <- function(input) {
   } else {
     "DOES NOT FAVOUR APPROVAL — anticipated gain does not outweigh expected strain."
   }
-  
+
   list(
     suitability      = suitability,
     strain_score     = strain_score,
@@ -100,13 +101,13 @@ build_narrative <- function(input, summary) {
   title <- if (nzchar(input$title)) input$title else "Untitled project"
   obj   <- if (nzchar(input$objective)) input$objective else "Objective not provided"
   qs    <- if (nzchar(input$questions)) input$questions else "—"
-  
+
   ints  <- if (length(input$interests)) paste0("• ", paste( interest_choices[names(interest_choices) %in% input$interests], collapse = "\n• "))
   else "—"
-  
+
   nonp  <- if (length(input$nonpath)) paste0("• ", paste( nonpath_choices[names(nonpath_choices) %in% input$nonpath], collapse = "\n• "))
   else "—"
-  
+
   glue("
 # Weighing of Interests — Summary
 
@@ -159,7 +160,7 @@ app_theme <- bs_theme(
 )
 
 ui <- page_navbar(
-  title = "Weighing of Interests — Gate 1",
+  title = "Weighing of Interests — Instrumental Indispensability Checker v0.6",
   theme = app_theme,
   sidebar = NULL,
   nav_panel(
@@ -250,21 +251,22 @@ ui <- page_navbar(
   ),
   footer = div(
     class = "text-center text-muted small py-3",
-    HTML("This app helps structure the proportionality assessment (suitability, necessity, strain vs. anticipated gain).")
+    HTML("© Cristian Berce 2025 <br>"),
+    HTML("This app helps determining instrumental indispensability. It does not replace subject matter expert knowledge")
   )
 )
 
 # --- Server ---------------------------------------------------------------
 
 server <- function(input, output, session) {
-  
+
   summary_vals <- reactive({
     req(input$construct, input$internal, input$external,
         input$replacement, input$reduction, input$refinement,
         input$severity, input$gain, input$likelihood)
     compute_summary(input)
   })
-  
+
   output$scores <- renderUI({
     s <- summary_vals()
     tags$div(
@@ -275,7 +277,7 @@ server <- function(input, output, session) {
       tags$p(HTML(glue("<b>Decision suggestion:</b><br>{s$decision}")))
     )
   })
-  
+
   output$narrative <- renderUI({
     s <- summary_vals()
     md <- build_narrative(input, s)
@@ -290,7 +292,7 @@ server <- function(input, output, session) {
         gsub("\\n", "<br>", x = _, perl = TRUE)
     )
   })
-  
+
   output$dl_report <- downloadHandler(
     filename = function() {
       paste0("weighing_of_interests_", gsub("\\W+", "_", tolower(input$title %||% "project")), ".txt")

@@ -6,7 +6,7 @@ In Switzerland, animal studies are permitted only when the applicant can demonst
 
 The Swiss Animal Welfare Act and its implementing guidelines require researchers to respect animal dignity and apply the **3Rs** (*Replacement, Reduction, Refinement*). The Swiss Academy of Medical Sciences (SAMS) updated its weighing-of-interests guidance in 2022, and in 2025 SAMS and the Federal Food Safety and Veterinary Office published new ethical guidelines clarifying these obligations.
 
-This app operationalises those documents to help applicants prepare comprehensive submissions.
+This app operationalises those documents to help applicants prepare comprehensive submissions. I have called it Gate 1 because it is one of the two apps that performs in this area of application. Gate 2 will be released at a later time date and will focus on the weighing of interest.
 
 ---
 
@@ -103,6 +103,7 @@ If Gain and Likelihood were both 3 and two societal interests selected → Inter
 
 ## Citation
 
-If you use or adapt this app, please cite the accompanying paper describing the methodology.
+If you use or adapt this app, please cite the accompanying paper describing the methodology (biorXiv link to be updated at a later timepoint)
 
-**Reference:** [Animal experimentation – SAMS](https://www.samw.ch/en/Projects/Overview-of-projects/Animal-experimentation.html)
+## References: 
+[Animal experimentation – SAMS](https://www.samw.ch/en/Projects/Overview-of-projects/Animal-experimentation.html)

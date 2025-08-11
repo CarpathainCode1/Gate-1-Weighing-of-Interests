@@ -1,12 +1,12 @@
-# Gate 1 Shiny Application – Instrumental Indispensability Checker
+# R Shiny Application – Instrumental Indispensability Checker
 
-This repository contains an interactive **R Shiny application** that implements the *Gate 1* assessment (also known as *instrumental indispensability*) required under Swiss law before animal experiments may be licensed.
+This repository contains an interactive **R Shiny application** that implements the *instrumental indispensability* assessment required under Swiss law before animal experiments may be licensed.
 
 In Switzerland, animal studies are permitted only when the applicant can demonstrate that the proposed work is scientifically suitable, necessary, and appropriate. Only then do licensing bodies compare the expected strain on animals with the anticipated gain in knowledge.
 
 The Swiss Animal Welfare Act and its implementing guidelines require researchers to respect animal dignity and apply the **3Rs** (*Replacement, Reduction, Refinement*). The Swiss Academy of Medical Sciences (SAMS) updated its weighing-of-interests guidance in 2022, and in 2025 SAMS and the Federal Food Safety and Veterinary Office published new ethical guidelines clarifying these obligations.
 
-This app operationalises those documents to help applicants prepare comprehensive Gate 1 submissions.
+This app operationalises those documents to help applicants prepare comprehensive submissions.
 
 ---
 

@@ -1,5 +1,5 @@
-# Gate 1: Weighing-of-Interests — Interactive Shiny App
-# Save this file as app.R and run with: shiny::runApp()
+# Gate 1: Assessment of instrumental indispensability — Interactive Shiny App
+# Save this file as and run with: shiny::runApp()
 # --- C. Berce 2025 --------------------------------------------------------
 
 library(shiny)
@@ -113,11 +113,11 @@ build_narrative <- function(input, summary) {
 
 **Project:** {title}
 
-## 1) Experimental objective
+1) Experimental objective
 - **Objective:** {obj}
 - **Questions/Hypotheses:** {qs}
 
-## 2) Instrumental indispensability
+2) Instrumental indispensability
 **Suitability (0–3 anchors)**
 - Construct validity: {scale_badge(input$construct)}
 - Internal validity:  {scale_badge(input$internal)}
@@ -129,18 +129,18 @@ build_narrative <- function(input, summary) {
 - Reduction measures justified? **{ifelse(as.numeric(input$reduction)==1, 'Yes', 'No')}**
 - Refinement measures implemented? **{ifelse(as.numeric(input$refinement)==1, 'Yes', 'No')}**
 
-## 3) Strain imposed on animals
+3) Strain imposed on animals
 - **Severity grade:** {sev_choices[as.character(input$severity)]}
 - Non-pathocentric elements:\n{nonp}
 - **Strain score:** {sprintf('%.2f', summary$strain_score)}
 
-## 4) Legitimate societal interests & anticipated gain
+4) Legitimate societal interests & anticipated gain
 - Interests served:\n{ints}
 - Anticipated gain (0–3): {scale_badge(input$gain)}
 - Likelihood of achieving objectives (0–3): {scale_badge(input$likelihood)}
 - **Interest score:** {sprintf('%.2f', summary$interest_score)}
 
-## 5) Overall suggestion
+5) Overall suggestion
 **{summary$decision}**
 
 > Notes:
@@ -306,3 +306,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+

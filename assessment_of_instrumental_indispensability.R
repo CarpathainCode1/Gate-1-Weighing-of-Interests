@@ -1,5 +1,7 @@
-# Gate 1: Assessment of instrumental indispensability — Interactive Shiny App
-# Save this file as and run with: shiny::runApp()
+# Gate 1: Weighing-of-Interests — Interactive Shiny App
+# Save instructions.md in the same folder as this script
+# the Markdown file contains usage instructions
+# Save this file as app.R and run with: shiny::runApp()
 # --- C. Berce 2025 --------------------------------------------------------
 
 library(shiny)
@@ -32,7 +34,7 @@ interest_choices <- c(
 )
 
 nonpath_choices <- c(
-  "Excessive instrumentalisation"           = "instrumentalisation",
+  "Excessive instrumentalisation"             = "instrumentalisation",
   "Humiliation / substantial loss of control" = "humiliation",
   "Major interference with appearance/abilities" = "appearance"
 )
@@ -179,7 +181,9 @@ ui <- page_navbar(
 <li>State a clear research question and hypothesis.</li>
 <li>Plan for randomisation, blinding, and pre-specifying analyses.</li>
 <li>Document Replace/Reduce/Refine choices.</li>
-</ul>")
+</ul>"),
+        # Help link placed inside the card (valid location)
+        actionLink("show_help", label = "📄 Full instructions", icon = icon("circle-info"))
       )
     )
   ),
@@ -212,7 +216,7 @@ ui <- page_navbar(
         helpText("Severity relates to pain, suffering, harm, anxiety (0–3).")
       ),
       card(
-        card_header("Non‑pathocentric strain"),
+        card_header("Non-pathocentric strain"),
         checkboxGroupInput("nonpath", "Select any which apply", choices = nonpath_choices),
         helpText("These affect dignity (e.g., excessive instrumentalisation) even when not experienced as pain.")
       )
@@ -238,7 +242,7 @@ ui <- page_navbar(
     layout_columns(
       col_widths = c(7,5),
       card(
-        card_header("Auto‑generated narrative"),
+        card_header("Auto-generated narrative"),
         htmlOutput("narrative", container = div, style = "max-width: 900px;")
       ),
       card(
@@ -278,6 +282,22 @@ server <- function(input, output, session) {
     )
   })
 
+  # Show Markdown instructions in a modal when the help link is clicked
+  observeEvent(input$show_help, {
+    showModal(
+      modalDialog(
+        title = "How to use this app",
+        easyClose = TRUE,
+        size = "l",
+        footer = modalButton("Close"),
+        tags$div(
+          style = "max-height:60vh; overflow:auto;",
+          includeMarkdown("instructions.md")
+        )
+      )
+    )
+  })
+
   output$narrative <- renderUI({
     s <- summary_vals()
     md <- build_narrative(input, s)
@@ -306,4 +326,3 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-

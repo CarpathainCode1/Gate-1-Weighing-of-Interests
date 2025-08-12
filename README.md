@@ -45,6 +45,7 @@ This app operationalises those documents to help applicants prepare comprehensiv
    install.packages(c("shiny", "bslib", "glue"))
    ```
 3. Clone or download this repository and save `app.R` into a folder (e.g. `gate1_app/`).
+4. Clone or download `instructions.md` into the same folder.
 
 ---
 
